@@ -68,3 +68,11 @@ sf::FloatRect Player::getBounds() const {
 bool Player::isAttacking() const {
     return attacking;
 }
+
+void Player::move(sf::Vector2f offset) {
+    shape.move(offset);
+}
+
+void Player::setPosition(sf::Vector2f pos) {
+    shape.setPosition(pos);
+}
