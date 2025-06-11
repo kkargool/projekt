@@ -3,6 +3,7 @@
 Game::Game()
     : window(sf::VideoMode(800, 600), "Bombardini Combatini"),
     player1(true), player2(false), selected1(0), selected2(0), gameState(State::MainMenu) {
+main
     initObstacles();
 }
 
@@ -98,6 +99,7 @@ void Game::mainMenu() {
     }
 }
 
+main
 void Game::initObstacles() {
     sf::RectangleShape wall;
     wall.setSize({120.f, 40.f});
