@@ -2,43 +2,32 @@
 
 Game::Game()
     : window(sf::VideoMode(800, 600), "Bombardini Combatini"),
-    player1(true), player2(false), selected1(0), selected2(0), gameState(State::MainMenu) {
-main
-    initObstacles();
-}
+    player1(true), player2(false), gameState(State::MainMenu) {
+    initStartButton();
+    initMap();
 
-void Game::run() {
-    while (window.isOpen()) {
-        processEvents();
-        sf::Time dt = clock.restart();
-        update(dt);
-        render();
-    }
-}
-
-void Game::processEvents() {
-    sf::Event event;
-    while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed)
-            window.close();
-    }
-}
-
-void Game::update(sf::Time dt) {
-    if (gameState == State::MainMenu) {
-        mainMenu();
-    } else if (gameState == State::CharacterSelect) {
-        characterSelect();
-    } else if (gameState == State::Playing) {
-        player1.update(dt);
-        player2.update(dt);
-        resolveCollisions(player1);
-        resolveCollisions(player2);
-        resolvePlayerCollision();
-        handleAttacks();
-    }
-}
-
+        title.setPosition(150, 150);
+        sf::Text text("Start", font, 24);
+        sf::FloatRect bounds = startButton.getGlobalBounds();
+        text.setPosition(bounds.left + 50, bounds.top + 15);
+        window.draw(startButton);
+        window.draw(mapRect);
+void Game::mainMenu() {
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2i m = sf::Mouse::getPosition(window);
+        if (startButton.getGlobalBounds().contains(static_cast<float>(m.x), static_cast<float>(m.y))) {
+            player1 = Player(true);
+            player2 = Player(false);
+            gameState = State::Playing;
+        }
+void Game::initStartButton() {
+    startButton.setSize({200.f, 50.f});
+    startButton.setFillColor(sf::Color(150, 150, 250));
+    startButton.setPosition(300.f, 280.f);
+void Game::initMap() {
+    mapRect.setSize({800.f, 100.f});
+    mapRect.setFillColor(sf::Color(50, 150, 50));
+    mapRect.setPosition(0.f, 500.f);
 void Game::render() {
     window.clear();
 

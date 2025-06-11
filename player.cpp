@@ -1,7 +1,8 @@
 #include "player.h"
 
 Player::Player(bool isP1, int characterId) : isPlayerOne(isP1), health(100), attacking(false) {
-    shape.setSize({50.f, 50.f});
+    shape.setRadius(25.f);
+    shape.setOrigin(25.f, 25.f);
 
     switch (characterId) {
     case 0:

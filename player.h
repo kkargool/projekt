@@ -19,7 +19,7 @@ public:
     void setPosition(sf::Vector2f pos);
 
 private:
-    sf::RectangleShape shape;
+    sf::CircleShape shape;
     int health;
     bool isPlayerOne;
     bool attacking;
