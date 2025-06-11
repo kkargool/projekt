@@ -14,6 +14,10 @@ public:
     sf::FloatRect getBounds() const;
     bool isAttacking() const;
 
+    // movement helpers used for collision resolution
+    void move(sf::Vector2f offset);
+    void setPosition(sf::Vector2f pos);
+
 private:
     sf::RectangleShape shape;
     int health;
