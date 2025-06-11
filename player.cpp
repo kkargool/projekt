@@ -1,7 +1,8 @@
 #include "player.h"
 
 Player::Player(bool isP1, int characterId) : isPlayerOne(isP1), health(100), attacking(false) {
-    shape.setSize({50.f, 50.f});
+    shape.setRadius(25.f);
+    shape.setOrigin(25.f, 25.f);
 
     switch (characterId) {
     case 0:
@@ -67,4 +68,12 @@ sf::FloatRect Player::getBounds() const {
 
 bool Player::isAttacking() const {
     return attacking;
+}
+
+void Player::move(sf::Vector2f offset) {
+    shape.move(offset);
+}
+
+void Player::setPosition(sf::Vector2f pos) {
+    shape.setPosition(pos);
 }

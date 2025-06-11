@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "player.h"
 
 class Game
@@ -10,13 +11,17 @@ public:
     Game();
     void run();
 private:
-    enum class State { CharacterSelect, Playing };
+    enum class State { MainMenu, Playing };
 
     void processEvents();
     void update(sf::Time dt);
     void render();
     void handleAttacks();
-    void characterSelect();
+    void mainMenu();
+    void resolveCollisions(Player& player);
+    void resolvePlayerCollision();
+    void initStartButton();
+    void initMap();
 
     sf::RenderWindow window;
     Player player1;
@@ -26,7 +31,9 @@ private:
 
     sf::Clock clock;
     State gameState;
-    int selected1, selected2;
+    std::vector<sf::RectangleShape> obstacles;
+    sf::RectangleShape startButton;
+    sf::RectangleShape mapRect;
 };
 
 
