@@ -19,6 +19,7 @@ private:
     void handleAttacks();
     void characterSelect();
     void mainMenu();
+
     void resolveCollisions(Player& player);
     void resolvePlayerCollision();
     void initObstacles();
