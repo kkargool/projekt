@@ -11,13 +11,15 @@ public:
     Game();
     void run();
 private:
-    enum class State { CharacterSelect, Playing };
+    enum class State { MainMenu, CharacterSelect, Playing };
 
     void processEvents();
     void update(sf::Time dt);
     void render();
     void handleAttacks();
     void characterSelect();
+    void mainMenu();
+main
     void resolveCollisions(Player& player);
     void resolvePlayerCollision();
     void initObstacles();

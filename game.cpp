@@ -2,7 +2,8 @@
 
 Game::Game()
     : window(sf::VideoMode(800, 600), "Bombardini Combatini"),
-    player1(true), player2(false), selected1(0), selected2(0), gameState(State::CharacterSelect) {
+    player1(true), player2(false), selected1(0), selected2(0), gameState(State::MainMenu) {
+main
     initObstacles();
 }
 
@@ -24,7 +25,9 @@ void Game::processEvents() {
 }
 
 void Game::update(sf::Time dt) {
-    if (gameState == State::CharacterSelect) {
+    if (gameState == State::MainMenu) {
+        mainMenu();
+    } else if (gameState == State::CharacterSelect) {
         characterSelect();
     } else if (gameState == State::Playing) {
         player1.update(dt);
@@ -39,7 +42,16 @@ void Game::update(sf::Time dt) {
 void Game::render() {
     window.clear();
 
-    if (gameState == State::CharacterSelect) {
+    if (gameState == State::MainMenu) {
+        sf::Font font;
+        //font.loadFromFile("assets/font.ttf");
+        sf::Text title("Bombardini Combatini", font, 36);
+        title.setPosition(150, 200);
+        sf::Text prompt("Press Enter to Start", font, 24);
+        prompt.setPosition(220, 300);
+        window.draw(title);
+        window.draw(prompt);
+    } else if (gameState == State::CharacterSelect) {
         sf::Font font;
         //font.loadFromFile("assets/font.ttf");
         sf::Text text("Press 1-3 for P1, Num1-Num3 for P2", font, 24);
@@ -81,6 +93,13 @@ void Game::characterSelect() {
     }
 }
 
+void Game::mainMenu() {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+        gameState = State::CharacterSelect;
+    }
+}
+
+main
 void Game::initObstacles() {
     sf::RectangleShape wall;
     wall.setSize({120.f, 40.f});
